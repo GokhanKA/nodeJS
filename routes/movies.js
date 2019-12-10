@@ -66,15 +66,15 @@ router.delete('/:movie_id', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-    const { title, imdb_score, category, country, year } = req.body;
-    // const movie=new Movie(req.body);
-    const movie = new Movie({
-        title: title,
-        imdb_score: imdb_score,
-        category: category,
-        country: country,
-        year: year
-    });
+    // const { title, imdb_score, category, country, year } = req.body;
+    const movie = new Movie({...req.body });
+    // const movie = new Movie({
+    //     title: title,
+    //     imdb_score: imdb_score,
+    //     category: category,
+    //     country: country,
+    //     year: year
+    // });
     // movie.save((err, data) => {
     //     if (err)
     //         res.json(err);
@@ -83,7 +83,7 @@ router.post('/', (req, res, next) => {
     // });
     const promise = movie.save();
     promise.then((data) => {
-        res.json(data);
+        res.json({ status: 1 });
     }).catch((err) => {
         res.json(err);
     });
